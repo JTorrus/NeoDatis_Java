@@ -1,4 +1,4 @@
-package classes;
+package com.model;
 
 public class Department {
     private int deptNum;
