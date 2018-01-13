@@ -2,13 +2,11 @@ package com.executable;
 
 import com.model.Department;
 import com.model.Employee;
-import org.neodatis.odb.ODB;
-import org.neodatis.odb.ODBFactory;
-import org.neodatis.odb.ODBRuntimeException;
-import org.neodatis.odb.Objects;
+import org.neodatis.odb.*;
 import org.neodatis.odb.core.query.IQuery;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
+import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -18,7 +16,7 @@ import java.util.Scanner;
 public class Main {
     private static ODB odb = ODBFactory.open("user.database");
     private static Objects<Department> departmentObjects;
-    private static Objects<Employee> employeeObjects = null;
+    private static Objects<Employee> employeeObjects;
 
     public static void main(String[] args) {
         run();
@@ -44,19 +42,23 @@ public class Main {
 
                 switch (option) {
                     case 1:
-                        if (dataSelection() == 'D') {
-                            if (!insertDepartment()) {
-                                System.out.println("Department not created, something went wrong");
-                            }
-                        } else if (dataSelection() == 'E') {
-                            if (!insertEmployee()) {
-                                System.out.println("Employee not created, something went wrong");
-                            }
-                        } else {
-                            System.out.println(dataSelection());
+                        switch (dataSelection()) {
+                            case 'D':
+                                if (!insertDepartment()) {
+                                    System.out.println("Department not created, something went wrong");
+                                }
+                                break;
+                            case 'E':
+                                if (!insertEmployee()) {
+                                    System.out.println("Employee not created, something went wrong");
+                                }
+                                break;
+                            default:
+                                System.out.println("Enter a valid data");;
+                                break;
                         }
-                        break;
                     case 2:
+                        showDeptAndEmpl();
                         break;
                     case 3:
                         break;
@@ -86,7 +88,7 @@ public class Main {
         String choice;
 
         System.out.println("Which type of data do you want to insert (Department or Employee)");
-        choice = sc.nextLine();
+        choice = sc.next();
 
         if (choice.equalsIgnoreCase("department")) {
             return 'D';
@@ -175,7 +177,7 @@ public class Main {
         deptNumCheck = sc.nextInt();
 
         if (deptNumExists(deptNumCheck)) {
-            dept = (Department) getDepartmentObjects(deptNumCheck);
+            dept = getDepartmentObjects(deptNumCheck).getFirst();
 
             System.out.println("Enter the employee's number");
             empNum = sc.nextInt();
@@ -233,5 +235,26 @@ public class Main {
         }
 
         return departmentReturned;
+    }
+
+    private static void showDeptAndEmpl() {
+        try {
+            Values deptValues = odb.getValues(new ValuesCriteriaQuery(Class.forName("com.model.Department")).field("deptNum").field("deptName").field("loc"));
+            Values emplValues = odb.getValues(new ValuesCriteriaQuery(Class.forName("com.model.Employee")).field("name").field("lastName").field("dept.deptName"));
+
+            while (deptValues.hasNext()) {
+                ObjectValues objectValues = deptValues.next();
+
+                System.out.println("Department's num: " + objectValues.getByAlias("deptNum") + " --- name: " + objectValues.getByAlias("deptName") + " --- loc: " + objectValues.getByAlias("loc"));
+            }
+
+            while (emplValues.hasNext()) {
+                ObjectValues objectValues = emplValues.next();
+
+                System.out.println("Employee's first name: " + objectValues.getByAlias("name") + " --- last name: " + objectValues.getByAlias("lastName") + " --- department's name: " + objectValues.getByAlias("dept.deptName"));
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
     }
 }
