@@ -11,6 +11,7 @@ import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -48,7 +49,9 @@ public class Main {
                                 System.out.println("Department not created, something went wrong");
                             }
                         } else if (dataSelection() == 'E') {
-                            if ()
+                            if (!insertEmployee()) {
+                                System.out.println("Employee not created, something went wrong");
+                            }
                         } else {
                             System.out.println(dataSelection());
                         }
@@ -173,9 +176,50 @@ public class Main {
 
         if (deptNumExists(deptNumCheck)) {
             dept = (Department) getDepartmentObjects(deptNumCheck);
+
+            System.out.println("Enter the employee's number");
+            empNum = sc.nextInt();
+
+            if (!emplNumExists(empNum)) {
+                System.out.println("Enter the employee's name");
+                name = sc.next();
+
+                System.out.println("Enter the employee's last name");
+                lastName = sc.next();
+
+                System.out.println("Enter the employee's job");
+                job = sc.next();
+
+                registerDate = new Date(Calendar.getInstance().getTime().getTime());
+
+                System.out.println("Enter the employee's salary");
+                salary = sc.nextFloat();
+
+                System.out.println("Enter the employee's commission");
+                commission = sc.nextFloat();
+
+                Employee employee = new Employee(empNum, lastName, name, job, registerDate, salary, commission, dept);
+                odb.store(employee);
+                correct = true;
+            }
         } else {
             System.out.println("There's no department matching this number, you should create it previously");
         }
+
+        return correct;
+    }
+
+    private static boolean emplNumExists(int empNum) {
+        employeeObjects = null;
+
+        try {
+            IQuery query = new CriteriaQuery(Class.forName("com.model.Employee"), Where.equal("empNum", empNum));
+            employeeObjects = odb.getObjects(query);
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
+
+        return employeeObjects.hasNext();
     }
 
     private static Objects<Department> getDepartmentObjects(int deptNumCheck) {
