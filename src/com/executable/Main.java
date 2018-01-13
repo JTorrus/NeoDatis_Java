@@ -109,14 +109,9 @@ public class Main {
         sc.useDelimiter("\n");
 
         boolean correct = false;
-        int deptNum;
         String deptName;
         String loc;
 
-        System.out.println("Enter the department's number");
-        deptNum = sc.nextInt();
-
-        if (!deptNumExists(deptNum)) {
             System.out.println("Enter the department's name");
             deptName = sc.next();
 
@@ -124,17 +119,14 @@ public class Main {
                 System.out.println("Enter the department's localization");
                 loc = sc.next();
 
-                Department department = new Department(deptNum, deptName, loc);
+                Department department = new Department(nextDeptNum(), deptName, loc);
                 odb.store(department);
                 correct = true;
 
-                System.out.println("Department " + deptNum + " succesfully created");
+                System.out.println("Department " + deptName + " succesfully created");
             } else {
                 System.err.println("This dept name already exists");
             }
-        } else {
-            System.err.println("This dept number already exists");
-        }
 
         return correct;
     }
@@ -170,7 +162,6 @@ public class Main {
         sc.useDelimiter("\n");
 
         boolean correct = false;
-        int empNum;
         String lastName;
         String name;
         String job;
@@ -186,10 +177,6 @@ public class Main {
         if (deptNumExists(deptNumCheck)) {
             dept = getDepartmentObjects(deptNumCheck).getFirst();
 
-            System.out.println("Enter the employee's number");
-            empNum = sc.nextInt();
-
-            if (!emplNumExists(empNum)) {
                 System.out.println("Enter the employee's name");
                 name = sc.next();
 
@@ -207,12 +194,9 @@ public class Main {
                 System.out.println("Enter the employee's commission");
                 commission = sc.nextFloat();
 
-                Employee employee = new Employee(empNum, lastName, name, job, registerDate, salary, commission, dept);
+                Employee employee = new Employee(nextEmplNum(), lastName, name, job, registerDate, salary, commission, dept);
                 odb.store(employee);
                 correct = true;
-            } else {
-                System.err.println("There's already an employee with this number");
-            }
         } else {
             System.out.println("There's no department matching this number, you should create it previously");
         }
@@ -324,5 +308,31 @@ public class Main {
         } catch (ClassNotFoundException e) {
             System.err.println("No such class found");
         }
+    }
+
+    private static int nextDeptNum() {
+        departmentObjects = null;
+
+        try {
+            IQuery query = new CriteriaQuery(Class.forName("com.model.Department"));
+            departmentObjects = odb.getObjects(query);
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
+
+        return departmentObjects.size()+1;
+    }
+
+    private static int nextEmplNum() {
+        employeeObjects = null;
+
+        try {
+            IQuery query = new CriteriaQuery(Class.forName("com.model.Employee"));
+            employeeObjects = odb.getObjects(query);
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
+
+        return departmentObjects.size()+1;
     }
 }
