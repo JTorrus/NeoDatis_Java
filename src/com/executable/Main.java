@@ -34,7 +34,7 @@ public class Main {
                 System.out.println("------------ MENU ------------");
                 System.out.println("1. Insert data");
                 System.out.println("2. Show all departments and employee's full names of the database");
-                System.out.println("3. Show employees with a specific ID");
+                System.out.println("3. Show employees with a specific department number");
                 System.out.println("4. Show average salary of employees in a specific department");
                 System.out.println("5. Show count of employees for each department");
                 System.out.println("6. Exit");
@@ -197,6 +197,8 @@ public class Main {
                 Employee employee = new Employee(nextEmplNum(), lastName, name, job, registerDate, salary, commission, dept);
                 odb.store(employee);
                 correct = true;
+
+                System.out.println("Employee " + name + " " + lastName + " succesfully created");
         } else {
             System.out.println("There's no department matching this number, you should create it previously");
         }
