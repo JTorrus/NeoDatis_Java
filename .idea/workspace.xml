@@ -18,8 +18,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/executable/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="146" column="21" lean-forward="false" selection-start-line="146" selection-start-column="21" selection-end-line="146" selection-end-column="21" />
               <folding>
                 <element signature="e#747#748#0" expanded="true" />
                 <element signature="e#768#769#0" expanded="true" />
@@ -29,7 +29,6 @@
                 <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
                 <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
                 <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-                <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
                 <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
                 <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
                 <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />
@@ -423,7 +422,7 @@
       <workItem from="1515432398604" duration="612000" />
       <workItem from="1515508332135" duration="5329000" />
       <workItem from="1515680216361" duration="7760000" />
-      <workItem from="1515849200962" duration="13670000" />
+      <workItem from="1515849200962" duration="13849000" />
     </task>
     <task id="LOCAL-00001" summary="Init project, classes with basic attributes and methods">
       <created>1515425173866</created>
@@ -467,11 +466,18 @@
       <option name="project" value="LOCAL" />
       <updated>1515862530491</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Project finished">
+      <created>1515866655182</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1515866655182</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31229000" />
+    <option name="totallyTimeSpent" value="31408000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -520,7 +526,8 @@
     <MESSAGE value="Insert employees method to database implemented" />
     <MESSAGE value="Method for select all from depts and empl implemented, fixes in dataselection method, changed if's structure to switch" />
     <MESSAGE value="showemplcoountforeachdept method implemented, average salary method WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="showemplcoountforeachdept method implemented, average salary method WIP" />
+    <MESSAGE value="Project finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -542,7 +549,6 @@
             <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
             <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-            <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
             <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
             <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />
@@ -629,7 +635,6 @@
             <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
             <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-            <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
             <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
             <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />
@@ -716,7 +721,6 @@
             <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
             <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-            <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
             <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
             <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />
@@ -803,7 +807,6 @@
             <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
             <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-            <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
             <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
             <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />
@@ -890,7 +893,6 @@
             <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
             <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-            <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
             <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
             <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />
@@ -1038,8 +1040,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/executable/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="145" column="0" lean-forward="true" selection-start-line="145" selection-start-column="0" selection-end-line="145" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="146" column="21" lean-forward="false" selection-start-line="146" selection-start-column="21" selection-end-line="146" selection-end-column="21" />
           <folding>
             <element signature="e#747#748#0" expanded="true" />
             <element signature="e#768#769#0" expanded="true" />
@@ -1049,7 +1051,6 @@
             <element signature="method#deptNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#deptNameExists#0;class#Main#0" expanded="false" />
             <element signature="method#insertEmployee#0;class#Main#0" expanded="false" />
-            <element signature="method#emplNumExists#0;class#Main#0" expanded="false" />
             <element signature="method#getDepartmentObjects#0;class#Main#0" expanded="false" />
             <element signature="method#showDeptAndEmpl#0;class#Main#0" expanded="false" />
             <element signature="method#showEmplByDeptNum#0;class#Main#0" expanded="false" />

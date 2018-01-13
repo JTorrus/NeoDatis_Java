@@ -204,19 +204,6 @@ public class Main {
         return correct;
     }
 
-    private static boolean emplNumExists(int empNum) {
-        employeeObjects = null;
-
-        try {
-            IQuery query = new CriteriaQuery(Class.forName("com.model.Employee"), Where.equal("empNum", empNum));
-            employeeObjects = odb.getObjects(query);
-        } catch (ClassNotFoundException e) {
-            System.err.println("No such class found");
-        }
-
-        return employeeObjects.hasNext();
-    }
-
     private static Objects<Department> getDepartmentObjects(int deptNumCheck) {
         Objects<Department> departmentReturned = null;
 
@@ -333,6 +320,6 @@ public class Main {
             System.err.println("No such class found");
         }
 
-        return departmentObjects.size()+1;
+        return employeeObjects.size()+1;
     }
 }
