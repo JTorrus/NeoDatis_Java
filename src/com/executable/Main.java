@@ -4,6 +4,7 @@ import com.model.Department;
 import com.model.Employee;
 import org.neodatis.odb.*;
 import org.neodatis.odb.core.query.IQuery;
+import org.neodatis.odb.core.query.criteria.ICriterion;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 import org.neodatis.odb.impl.core.query.values.ValuesCriteriaQuery;
@@ -37,7 +38,7 @@ public class Main {
                 System.out.println("4. Show average salary of employees in a specific department");
                 System.out.println("5. Show count of employees for each department");
                 System.out.println("6. Exit");
-
+                System.out.print("Choose an option -> ");
                 option = sc.nextInt();
 
                 switch (option) {
@@ -57,14 +58,18 @@ public class Main {
                                 System.out.println("Enter a valid data");;
                                 break;
                         }
+                        break;
                     case 2:
                         showDeptAndEmpl();
                         break;
                     case 3:
+                        showEmplByDeptNum();
                         break;
                     case 4:
+                        showEmplAvgSalaryByDeptName();
                         break;
                     case 5:
+                        showEmplCountForEachDept();
                         break;
                     case 6:
                         exit = true;
@@ -101,6 +106,7 @@ public class Main {
 
     private static boolean insertDepartment() {
         Scanner sc = new Scanner(System.in);
+        sc.useDelimiter("\n");
 
         boolean correct = false;
         int deptNum;
@@ -161,6 +167,7 @@ public class Main {
 
     private static boolean insertEmployee() {
         Scanner sc = new Scanner(System.in);
+        sc.useDelimiter("\n");
 
         boolean correct = false;
         int empNum;
@@ -203,6 +210,8 @@ public class Main {
                 Employee employee = new Employee(empNum, lastName, name, job, registerDate, salary, commission, dept);
                 odb.store(employee);
                 correct = true;
+            } else {
+                System.err.println("There's already an employee with this number");
             }
         } else {
             System.out.println("There's no department matching this number, you should create it previously");
@@ -252,6 +261,65 @@ public class Main {
                 ObjectValues objectValues = emplValues.next();
 
                 System.out.println("Employee's first name: " + objectValues.getByAlias("name") + " --- last name: " + objectValues.getByAlias("lastName") + " --- department's name: " + objectValues.getByAlias("dept.deptName"));
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
+    }
+
+    private static void showEmplByDeptNum() {
+        Scanner sc = new Scanner(System.in);
+        int deptNum;
+        Objects<Employee> emplQueries;
+
+        System.out.println("Enter the department's number");
+        deptNum = sc.nextInt();
+
+        try {
+            IQuery query = new CriteriaQuery(Class.forName("com.model.Employee"), Where.equal("dept.deptNum", deptNum));
+            emplQueries = odb.getObjects(query);
+
+            while (emplQueries.hasNext()) {
+                Employee employee = emplQueries.next();
+
+                System.out.println(employee.getLastName());
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
+    }
+
+    private static void showEmplAvgSalaryByDeptName() {
+        Scanner sc = new Scanner(System.in);
+        sc.useDelimiter("\n");
+
+        String deptName;
+
+        System.out.println("Enter the department's name");
+        deptName = sc.next();
+
+        try {
+            IQuery query = new CriteriaQuery(Class.forName("com.model.Employee"), Where.equal("dept.deptName", deptName));
+            Values emplValues = odb.getValues(new ValuesCriteriaQuery((CriteriaQuery) query).avg("salary"));
+
+            while (emplValues.hasNext()) {
+                ObjectValues objectValues = emplValues.next();
+
+                System.out.println("Average: " + objectValues.getByAlias("salary"));
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("No such class found");
+        }
+    }
+
+    private static void showEmplCountForEachDept() {
+        try {
+            Values emplValues = odb.getValues(new ValuesCriteriaQuery(Class.forName("com.model.Employee")).field("dept.deptName").count("emplNum").groupBy("dept.deptName"));
+
+            while (emplValues.hasNext()) {
+                ObjectValues objectValues = emplValues.next();
+
+                System.out.println("There's " + objectValues.getByAlias("emplNum") + " employees in " + objectValues.getByAlias("dept.deptName"));
             }
         } catch (ClassNotFoundException e) {
             System.err.println("No such class found");
